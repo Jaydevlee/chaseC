@@ -1,0 +1,28 @@
+package com.example.chaseC.entity;
+
+import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.LastModifiedDate;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class TrackHistory {
+    private Long id;
+    private String statusStep;
+    @LastModifiedDate
+    private LocalDateTime processingTime;
+    @ManyToOne
+    @JoinColumn(name = "trackRequest_id")
+    private TrackRequest trackrequest;
+}
