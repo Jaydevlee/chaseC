@@ -1,5 +1,5 @@
 package com.example.chaseC.service;
 
-public interface searchHblNoService {
+public interface CustomsApiClient {
     String getStatus (String hblNo);
 }
