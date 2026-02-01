@@ -17,7 +17,7 @@ import java.util.Calendar;
 @RequiredArgsConstructor
 @Profile("prod")
 public class RealClientApiService implements CustomsApiClient {
-    @Value("${apiKey}")
+//    @Value("${apiKey}")
     private String apiKey;
     int year = Calendar.getInstance().get(Calendar.YEAR);
 
