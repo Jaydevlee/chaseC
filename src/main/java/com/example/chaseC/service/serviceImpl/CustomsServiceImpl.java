@@ -7,6 +7,7 @@ import com.example.chaseC.service.CustomsService;
 import dto.TrackRequestDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class CustomsServiceImpl implements CustomsService {
 
   @Override
   @Transactional
+  @Scheduled(fixedRate = 60000)
   public TrackRequest createTracker(TrackRequestDto trackRequestDto) {
     TrackRequest trackRequest = TrackRequest.builder()
           .id(trackRequestDto.getId())
