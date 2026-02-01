@@ -22,7 +22,6 @@ public class CustomsServiceImpl implements CustomsService {
 
   @Override
   @Transactional
-
   public TrackRequest createTracker(TrackRequestDto trackRequestDto) {
     TrackRequest trackRequest = TrackRequest.builder()
           .id(trackRequestDto.getId())
@@ -49,7 +48,7 @@ public class CustomsServiceImpl implements CustomsService {
 
       String currentStatus = customsApiClient.getStatus(trackRequest.getHblNo());
       if (!currentStatus.equals(trackRequest.getStatus())) {
-        log.info("✨ 상태 변경! [{}]: {} -> {}", trackRequest.getHblNo(), trackRequest.getStatus(), currentStatus);
+        log.info("상태 변경 [{}]: {} -> {}", trackRequest.getHblNo(), trackRequest.getStatus(), currentStatus);
         trackRequest.updateStatus(currentStatus);
       }
     }
