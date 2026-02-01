@@ -18,19 +18,6 @@ import javax.sound.midi.Track;
 @Profile("dev")
 @RequiredArgsConstructor
 public class MockClientApiService implements CustomsApiClient {
-   private final TrackRequestRepository trackRequestRepository;
-
-   private TrackRequestDto createTracker(TrackRequestDto trackRequestDto) {
-      TrackRequest trackRequest = TrackRequest.builder()
-              .id(trackRequestDto.getId())
-              .hblNo(trackRequestDto.getHblNo())
-              .email(trackRequestDto.getEmail())
-              .createdAt(trackRequestDto.getCreatedAt())
-              .blYear(trackRequestDto.getBlYear())
-              .updatedAt(trackRequestDto.getUpdatedAt())
-              .build();
-   }
-
    private int call = 0;
 
    @Override
