@@ -10,6 +10,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.json.JSONObject;
@@ -44,15 +45,11 @@ public class RealClientApiService implements CustomsApiClient {
                     .queryParam("blYy", blYear)
                     .build()
                     .toUri();
-            RestTemplate restTemplate = new RestTemplate();
-            // 한글 깨짐 방지
-            restTemplate.getMessageConverters()
-                    .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
-
-            RequestEntity<Void> req = RequestEntity.get(uri).build();
-
-            ResponseEntity<String> response = restTemplate.exchange(req, String.class);
-            String xmlRes = response.getBody();
+            RestClient restClient = RestClient.builder()
+                .messageConverters(converters -> converters
+                        .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8)))
+                .build();
+            String xmlRes = restClient.get().uri(uri).retrieve().body(String.class);
             log.info("xml response: " + xmlRes);
 
             // xml to json 변환

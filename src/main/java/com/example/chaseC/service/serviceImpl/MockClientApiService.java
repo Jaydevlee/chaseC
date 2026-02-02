@@ -1,8 +1,5 @@
 package com.example.chaseC.service.serviceImpl;
 
-import com.example.chaseC.entity.TrackRequest;
-import com.example.chaseC.repository.TrackRequestRepository;
-import dto.TrackRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -10,8 +7,6 @@ import org.springframework.stereotype.Service;
 import com.example.chaseC.service.CustomsApiClient;
 
 import lombok.extern.slf4j.Slf4j;
-
-import javax.sound.midi.Track;
 
 @Service
 @Slf4j

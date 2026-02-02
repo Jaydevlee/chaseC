@@ -1,4 +1,4 @@
-package dto;
+package com.example.chaseC.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
