@@ -21,7 +21,7 @@ public class MockClientApiService implements CustomsApiClient {
    private int call = 0;
 
    @Override
-   public String getStatus(String hblNo){
+   public String getStatus(String hblNo, int blYear) {
       call++;
       String result = "";
       if(call <= 1) result = "입항적하목록 제출";

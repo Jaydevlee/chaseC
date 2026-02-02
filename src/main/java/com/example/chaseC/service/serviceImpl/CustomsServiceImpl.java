@@ -44,7 +44,8 @@ public class CustomsServiceImpl implements CustomsService {
           trackRequest = trackRequestRepository.save(trackRequest);
       }
       // 현재 상태 조회
-      String currentStatus = customsApiClient.getStatus(trackRequest.getHblNo());
+      String currentStatus = customsApiClient.getStatus(trackRequest.getHblNo(), trackRequest.getBlYear());
+
       // 상태가 변경되었으면 업데이트 및 히스토리 저장
       if(!currentStatus.equals(trackRequest.getStatus())) {
             trackRequest.updateStatus(currentStatus);
@@ -65,18 +66,26 @@ public class CustomsServiceImpl implements CustomsService {
     return trackHistory;
   }
 
-  @Scheduled(fixedRate = 60000)
+  @Scheduled(fixedRate = 360000)
   @Transactional
   public void updateStatus() {
     List<TrackRequest> allRequests = trackRequestRepository.findAll();
 
     for (TrackRequest trackRequest : allRequests) {
-      if("반출신고".equals(trackRequest.getStatus())) break;
+      if("반출신고".equals(trackRequest.getStatus())) continue;
 
-      String currentStatus = customsApiClient.getStatus(trackRequest.getHblNo());
+      String currentStatus = customsApiClient.getStatus(trackRequest.getHblNo(), trackRequest.getBlYear());
+
+      if (currentStatus == null) {
+        // 조회 실패 시 로그만 남기고 다음 택배로 넘어감 (프로그램 안 죽음)
+        log.warn("API 조회 실패 (데이터 없음): {}", trackRequest.getHblNo());
+        continue;
+      }
+
       if (!currentStatus.equals(trackRequest.getStatus())) {
         log.info("상태 변경 [{}]: {} -> {}", trackRequest.getHblNo(), trackRequest.getStatus(), currentStatus);
-        trackRequest.updateStatus(currentStatus);
+        TrackHistory newHistory = saveHistory(trackRequest, currentStatus);
+        trackRequest.getTrackHistory().add(newHistory);
       }
     }
   }
