@@ -1,7 +1,7 @@
 package com.example.chaseC.controller;
 
 import com.example.chaseC.service.CustomsService;
-import dto.TrackRequestDto;
+import com.example.chaseC.dto.TrackRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

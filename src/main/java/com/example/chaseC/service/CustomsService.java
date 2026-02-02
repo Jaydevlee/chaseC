@@ -1,6 +1,6 @@
 package com.example.chaseC.service;
 
-import dto.TrackRequestDto;
+import com.example.chaseC.dto.TrackRequestDto;
 
 public interface CustomsService {
   TrackRequestDto startTracker(TrackRequestDto trackRequestDto);
