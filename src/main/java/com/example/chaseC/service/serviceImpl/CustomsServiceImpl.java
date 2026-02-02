@@ -1,5 +1,6 @@
 package com.example.chaseC.service.serviceImpl;
 
+import com.example.chaseC.dto.MailSendDto;
 import com.example.chaseC.entity.TrackHistory;
 import com.example.chaseC.entity.TrackRequest;
 import com.example.chaseC.repository.TrackHistoryRepository;
@@ -8,6 +9,7 @@ import com.example.chaseC.service.CustomsApiClient;
 import com.example.chaseC.service.CustomsService;
 import com.example.chaseC.dto.TrackHistoryDto;
 import com.example.chaseC.dto.TrackRequestDto;
+import com.example.chaseC.service.MailService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +27,7 @@ public class CustomsServiceImpl implements CustomsService {
   private final TrackRequestRepository trackRequestRepository;
   private final TrackHistoryRepository trackHistoryRepository;
   private final CustomsApiClient customsApiClient;
+  private final MailService mailService;
 
   @Override
   @Transactional
@@ -52,6 +55,7 @@ public class CustomsServiceImpl implements CustomsService {
             TrackHistory newHistory = saveHistory(trackRequest, currentStatus);
             trackRequest.getTrackHistory().add(newHistory);
       }
+
       return mapToDto(trackRequest);
   }
 
@@ -86,6 +90,15 @@ public class CustomsServiceImpl implements CustomsService {
         log.info("상태 변경 [{}]: {} -> {}", trackRequest.getHblNo(), trackRequest.getStatus(), currentStatus);
         TrackHistory newHistory = saveHistory(trackRequest, currentStatus);
         trackRequest.getTrackHistory().add(newHistory);
+
+        if(trackRequest.getEmail() != null && !trackRequest.getEmail().isEmpty()) {
+          MailSendDto mailDto = MailSendDto.builder()
+                  .toEmail(trackRequest.getEmail())
+                  .hblNo(trackRequest.getHblNo())
+                  .newStatus(currentStatus)
+                  .build();
+          mailService.sendStatusUpdateEmail(mailDto);
+        }
       }
     }
   }
