@@ -18,10 +18,10 @@ public class TrackHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String statusStep;
+    private String status;
     @LastModifiedDate
     private LocalDateTime processingTime;
     @ManyToOne
     @JoinColumn(name = "trackRequest_id")
-    private TrackRequest trackrequest;
+    private TrackRequest trackRequest;
 }
