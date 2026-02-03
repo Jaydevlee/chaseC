@@ -29,6 +29,7 @@ chasec/
 │   │   ├── repository/        # 데이터베이스 접근 레이어
 │   │   ├── entity/            # JPA 엔티티 클래스
 │   │   ├── dto/               # 데이터 전송 객체
+|   |   ├── exception/         # 컨트롤러 전역 예외 처리
 │   │   └── ChasecApplication.java  # 메인 애플리케이션 클래스
 │   └── resources/
 │       ├── application.properties  # 애플리케이션 설정 파일
