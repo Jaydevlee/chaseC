@@ -1,10 +1,10 @@
 # ChaseC
-> A comprehensive cargo tracking system.
+> 통관 추적 시스템
 
 ## 프로젝트 개요 (Project Overview)
 ChaseC는 통관 과정 조회 시스템으로, 사용자가 화물의 통관 상태를 실시간으로 확인할 수 있도록 도와줍니다. 이 시스템은 관세청 API와 연동하여 최신 통관 정보를 제공합니다.
 그리고 사용자는 이메일을 통해 통관 상태 업데이트를 받을 수 있습니다.
------
+
 ## 주요 기능 (Key Features)
 - **화물 통관 상태 조회**: 사용자는 HBL(운송장)를 입력하여 화물의 통관 상태를 조회할 수 있습니다.
 - **이메일 알림**: Spring Scheduler를 통해 주기적으로 상태 변동을 감지하고, 변동시 이메일을 발송하여 상태변화를 고객에게 알려줄 수 있습니다.
@@ -59,6 +59,7 @@ erDiagram
 
 ## 데이터 흐름
 ```mermaid
+    graph TD
     A[사용자] -->|1. 조회 요청| B[Controller]
     B -->|2. 로직 수행| C[Service]
     C -->|3. API 호출| D[관세청 API]
