@@ -1,6 +1,7 @@
 package com.example.chaseC.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -17,11 +18,12 @@ import java.util.List;
 @NoArgsConstructor
 public class TrackRequestDto {
   private Long id;
-  @NotBlank(message = "송장번호를 입력해주세요.")
+  @NotBlank(message = "운송장번호(House B/L)를 입력해주세요.")
   private String hblNo;
   @NotBlank(message = "이메일을 입력해주세요.")
   @Pattern(regexp = "^[a-zA-Z0-9]{2,}(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
           message = "유효한 이메일 주소를 입력해주세요.")
+  @Email(message="이메일 형식이 올바르지 않습니다.")
   private String email;
   private String status;
   private int blYear;
