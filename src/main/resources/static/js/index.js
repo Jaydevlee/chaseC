@@ -2,10 +2,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let emailForm  = document.getElementById("email-input");
     let emailValid = document.getElementById("email-valid");
     trackBtn = document.getElementById("track-btn");
-
+    let hblNoInput = document.getElementById("hblNo-input").value;
     trackBtn.disabled = true;
     const emailReg = /^[a-zA-Z0-9]{2,}(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+    if(hblNoInput === ""){
+        trackBtn.disabled = true;
+    }
     emailForm.addEventListener("input", () => {
         const emailInput = emailForm.value.trim();
         const emailTest = emailReg.test(emailInput);
