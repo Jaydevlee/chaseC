@@ -38,19 +38,19 @@ chasec/
 erDiagram
     TrackRequest ||--o{ TrackHistory : "has many"
     TrackRequest {
-        Long id PK (기본키 Auto Increment)
-        String hblNo (HBL 번호)
-        String email (이메일)
-        int blYear  (BL 연도)
-        String status (현재 진행 상태)
-        LocalDateTime createdAt (최초 생성 일시)
-        LocalDateTime updatedAt (최종 수정 일시)
+        Long id PK "(기본키 Auto Increment)"
+        String hblNo "(HBL 번호)"
+        String email "(이메일)"
+        int blYear  "(BL 연도)"
+        String status "(현재 진행 상태)"
+        LocalDateTime createdAt "(최초 생성 일시)"
+        LocalDateTime updatedAt "(최종 수정 일시)"
     }
     TrackHistory {
-        Long id PK (기본키 Auto Increment)
-        Long track_request_id FK (외래키 TrackRequest 참조)
-        String status (과거/현재 상태)
-        LocalDateTime processingTime (처리 시간)
+        Long id PK "(기본키 Auto Increment)"
+        Long track_request_id FK "(외래키 TrackRequest 참조)"
+        String status "(과거/현재 상태)"
+        LocalDateTime processingTime "(처리 시간)"
     }
 ```
 
