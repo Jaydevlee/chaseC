@@ -1,5 +1,6 @@
 package com.example.chaseC.service.serviceImpl;
 
+import com.example.chaseC.service.MockCustomClientApi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Profile("dev")
 @RequiredArgsConstructor
-public class MockClientApiService implements CustomsApiClient {
+public class MockClientApiService implements MockCustomClientApi {
    private int call = 0;
 
    @Override
