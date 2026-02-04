@@ -1,6 +1,9 @@
 package com.example.chaseC.service;
 
-public interface CustomsApiClient {
-    String getStatus (String hblNo, int blYear);
+import java.util.List;
+import java.util.Map;
 
+public interface CustomsApiClient {
+
+    List<Map<String, String>> getTrackInfo (String hblNo, int blYear);
 }
